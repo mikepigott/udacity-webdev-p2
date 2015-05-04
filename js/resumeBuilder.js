@@ -20,7 +20,7 @@ var education = {
     {
       "name": "Rensselaear Polytechnic Institute",
       "city": "Troy, New York",
-      "degree": "Bachelor of Science"
+      "degree": "Bachelor of Science",
       "majors": [
         "Computer Science"
       ],
@@ -66,8 +66,14 @@ var projects = {
       {
         "title": "XML to Avro",
         "dates": "July - September 2014",
-        "description": "Tool to generate an Avro schema from an XML Schema,
-           and store any XML documents following that schema in Avro."
+        "description": "Tool to generate an Avro schema from an XML Schema, and store any XML documents following that schema in Avro."
       }
   ]
+}
+
+if (bio.skills) {
+    $("#header").append(HTMLskillsStart);
+    for (skill = 0; skill < bio.skills.length; ++skill) {
+	$("#skills").append(HTMLskills.replace('%data%', bio.skills[skill]));
+    }
 }
