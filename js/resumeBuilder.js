@@ -71,9 +71,9 @@ var projects = {
   ]
 }
 
-if (bio.skills) {
+if (bio.skills && bio.skills.length > 0) {
     $("#header").append(HTMLskillsStart);
-    for (skill = 0; skill < bio.skills.length; ++skill) {
+    for (skill in bio.skills) {
 	$("#skills").append(HTMLskills.replace('%data%', bio.skills[skill]));
     }
 }
