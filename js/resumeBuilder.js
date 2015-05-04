@@ -44,19 +44,22 @@ var work = {
       "employer": "OnDeck Inc.",
       "title": "Senior Software Engineer",
       "dates": "September 2014 - Present",
-      "description": "None."
+      "description": "None.",
+      "location": "New York, New York"
     },
     {
       "employer": "LinkedIn, Inc.",
       "title": "Senior Software Engineer",
       "dates": "April 2013 - May 2014",
-      "description": "None."
+      "description": "None.",
+      "location": "New York, New York"
     },
     {
        "employer": "FactSet Research Systems, Inc.",
        "title": "Senior Software Engineer",
        "dates": "July 2005 - February 2013",
-       "description": "Lots of stuff."
+       "description": "Lots of stuff.",
+       "location": "Norwalk, Connecticut"
     }
   ]
 }
@@ -75,5 +78,16 @@ if (bio.skills && bio.skills.length > 0) {
     $("#header").append(HTMLskillsStart);
     for (skill in bio.skills) {
 	$("#skills").append(HTMLskills.replace('%data%', bio.skills[skill]));
+    }
+}
+
+if (work.jobs && work.jobs.length > 0) {
+    for (job in work.jobs) {
+	$("#workExperience").append(HTMLworkStart);
+	$(".work-entry:last").append(HTMLworkEmployer.replace('%data%', work.jobs[job].employer));
+	$(".work-entry:last").append(HTMLworkTitle.replace('%data%', work.jobs[job].title));
+	$(".work-entry:last").append(HTMLworkDates.replace('%data%', work.jobs[job].dates));
+	$(".work-entry:last").append(HTMLworkLocation.replace('%data%', work.jobs[job].location));
+	$(".work-entry:last").append(HTMLworkDescription.replace('%data%', work.jobs[job].description));
     }
 }
