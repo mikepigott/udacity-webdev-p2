@@ -74,14 +74,7 @@ var projects = {
   ]
 }
 
-if (bio.skills && bio.skills.length > 0) {
-    $("#header").append(HTMLskillsStart);
-    for (skill in bio.skills) {
-	$("#skills").append(HTMLskills.replace('%data%', bio.skills[skill]));
-    }
-}
-
-if (work.jobs && work.jobs.length > 0) {
+function displayWork() {
     for (job in work.jobs) {
 	$("#workExperience").append(HTMLworkStart);
 	$(".work-entry:last").append(HTMLworkEmployer.replace('%data%', work.jobs[job].employer));
@@ -91,3 +84,17 @@ if (work.jobs && work.jobs.length > 0) {
 	$(".work-entry:last").append(HTMLworkDescription.replace('%data%', work.jobs[job].description));
     }
 }
+
+if (bio.skills && bio.skills.length > 0) {
+    $("#header").append(HTMLskillsStart);
+    for (skill in bio.skills) {
+	$("#skills").append(HTMLskills.replace('%data%', bio.skills[skill]));
+    }
+}
+
+if (work.jobs && work.jobs.length > 0) {
+    displayWork();
+}
+$(document).click(function(loc) {
+    console.log("Click: [" + loc.pageX + ", " + loc.pageY + "]");
+});
