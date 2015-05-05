@@ -139,6 +139,13 @@ ul {
   list-style-type: none;
 }
 
+ul.accomplishments {
+  list-style-type: square;
+  padding-left: 2%;
+  color: #333333;
+  font-size: 14px;
+}
+
 .biopic {
   float: left;
   padding: 10px;

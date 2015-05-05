@@ -1,44 +1,47 @@
+var dataTmpl = '%data%';
+
 var bio = {
   "name": "Michael Pigott",
   "role": "Senior Software Engineer",
   "contacts": {
-    "mobile": "203-969-5972",
+    "mobile": "914-555-9863",
     "email":  "rpimike1022@yahoo.com",
     "github": "mikepigott",
     "twitter": "@ironponyexpress",
     "location": "Tuckahoe, New York 10707"
   },
-  "welcomeMessage": "Hi, I'm Mike!",
+  "welcomeMessage": "Hi, I'm Mike! This is an interactive resume I created for the Udacity Web Developer's Nanodegree.",
   "skills": [
-    "C++", "Java", "Scala"
+    "C++", "Java", "Scala", "Perl", "Hadoop", "HBase", "ANTLR", "Play Framework"
   ],
   "bioPic": "images/profile.jpg"
 }
 
 bio.display = function() {
-    $("#header").prepend(HTMLheaderRole.replace('%data%', bio.role));
-    $("#header").prepend(HTMLheaderName.replace('%data%', bio.name));
+    $("#header").prepend(HTMLheaderRole.replace(dataTmpl, bio.role));
+    $("#header").prepend(HTMLheaderName.replace(dataTmpl, bio.name));
 
-    $("#topContacts").append(HTMLmobile.replace('%data%', bio.contacts.mobile));
-    $("#topContacts").append(HTMLemail.replace('%data%', bio.contacts.email));
-    $("#topContacts").append(HTMLtwitter.replace('%data%', bio.contacts.twitter));
-    $("#topContacts").append(HTMLgithub.replace('%data%', bio.contacts.github));
-    $("#topContacts").append(HTMLlocation.replace('%data%', bio.contacts.location));
+    $("#topContacts").append(HTMLmobile.replace(dataTmpl, bio.contacts.mobile));
+    $("#topContacts").append(HTMLemail.replace(dataTmpl, bio.contacts.email));
+    $("#topContacts").append(HTMLtwitter.replace(dataTmpl, bio.contacts.twitter));
+    $("#topContacts").append(HTMLgithub.replace(dataTmpl, bio.contacts.github));
+    $("#topContacts").append(HTMLlocation.replace(dataTmpl, bio.contacts.location));
 
-    $("#header").append(HTMLbioPic.replace('%data%', bio.bioPic));
+    $("#header").append(HTMLwelcomeMsg.replace(dataTmpl, bio.welcomeMessage));
+    $("#header").append(HTMLbioPic.replace(dataTmpl, bio.bioPic));
 
     if (bio.skills && bio.skills.length > 0) {
 	$("#header").append(HTMLskillsStart);
 	for (skill in bio.skills) {
-	    $("#skills").append(HTMLskills.replace('%data%', bio.skills[skill]));
+	    $("#skills").append(HTMLskills.replace(dataTmpl, bio.skills[skill]));
 	}
     }
 
-    $("#footerContacts").append(HTMLmobile.replace('%data%', bio.contacts.mobile));
-    $("#footerContacts").append(HTMLemail.replace('%data%', bio.contacts.email));
-    $("#footerContacts").append(HTMLtwitter.replace('%data%', bio.contacts.twitter));
-    $("#footerContacts").append(HTMLgithub.replace('%data%', bio.contacts.github));
-    $("#footerContacts").append(HTMLlocation.replace('%data%', bio.contacts.location));
+    $("#footerContacts").append(HTMLmobile.replace(dataTmpl, bio.contacts.mobile));
+    $("#footerContacts").append(HTMLemail.replace(dataTmpl, bio.contacts.email));
+    $("#footerContacts").append(HTMLtwitter.replace(dataTmpl, bio.contacts.twitter));
+    $("#footerContacts").append(HTMLgithub.replace(dataTmpl, bio.contacts.github));
+    $("#footerContacts").append(HTMLlocation.replace(dataTmpl, bio.contacts.location));
 }
 
 var education = {
@@ -68,13 +71,13 @@ education.display = function() {
 	    $("#education").append(HTMLschoolStart);
 
 	    var formattedName =
-		HTMLschoolName.replace('%data%', education.schools[school].name)
-	          + HTMLschoolDegree.replace('%data%', education.schools[school].degree);
+		HTMLschoolName.replace(dataTmpl, education.schools[school].name)
+	          + HTMLschoolDegree.replace(dataTmpl, education.schools[school].degree);
 
 	    $(".education-entry:last").append(formattedName);
-	    $(".education-entry:last").append(HTMLschoolDates.replace('%data%', education.schools[school].dates));
-	    $(".education-entry:last").append(HTMLschoolLocation.replace('%data%', education.schools[school].location));
-	    $(".education-entry:last").append(HTMLschoolMajor.replace('%data%', education.schools[school].major));
+	    $(".education-entry:last").append(HTMLschoolDates.replace(dataTmpl, education.schools[school].dates));
+	    $(".education-entry:last").append(HTMLschoolLocation.replace(dataTmpl, education.schools[school].location));
+	    $(".education-entry:last").append(HTMLschoolMajor.replace(dataTmpl, education.schools[school].major));
 	}
     }
 }
@@ -85,22 +88,33 @@ var work = {
       "employer": "OnDeck Inc.",
       "title": "Senior Software Engineer",
       "dates": "September 2014 - Present",
-      "description": "None.",
+      "description": "Updated OnDeck's Loan Servicing Platform (LSP), to better calculate principal & interest paid over the life of a term loan and line of credit.  Worked on a team to redesign and implement a replacement system for the legacy Java application.",
+      "accomplishments": [
+        "Implemented a P&I calculation more helpful for the finance and accounting teams."
+      ],
       "location": "1400 Broadway, New York, NY 10118"
     },
     {
       "employer": "LinkedIn, Inc.",
       "title": "Senior Software Engineer",
       "dates": "April 2013 - May 2014",
-      "description": "None.",
+      "description": "Worked with a team to develop, enhance, and maintain the GaaP system, a web-based script development environment using Java on the Play! web framework, its administrative tool, and script engine using Scala on the Play! framework. Lead engineer in a team which developed a prototype used to scrape career opportunities from client websites and post them to LinkedIn using the GaaP system. Built a reactive Scala web application on the Play! framework to retrieve the fetched jobs from the GaaP system, perform post-processing with data from internal and external REST services, and post to the LinkedIn Jobs API. Used the Anorm Scala API to read and write to an Oracle database.",
       "location": "350 5th Ave, New York, NY 10118"
     },
     {
        "employer": "FactSet Research Systems, Inc.",
        "title": "Senior Software Engineer",
        "dates": "July 2005 - February 2013",
-       "description": "Lots of stuff.",
-       "location": "601 Merritt Seven, Norwalk, Connecticut, 06851"
+       "description": "Responsible for designing and prototyping a new data storage format in HBase for performance comparison of financial time-series data against the FactSet custom financial time-series database. Developed a data transfer mechanism from existing FactSet custom databases to HBase using C++, Perl, Java, ANTLR, and Map/Reduce.  Managed a team of six engineers in the Quantitative Applications group to enhance and maintain FactSet's Alpha Testing, Portfolio Simulation, and Screen Iterator products, all written in C++. Worked with three Product Developers over two offices to prioritize both major projects and minor enhancements for those applications. Also initiated a side project to prototype a performance improvement of Alpha Testing via Map/Reduce on Hbase using C++, Thirft, Perl, Java, and Hadoop Map/Reduce.  Designed, developed, launched, and enhanced PA Reconciliation, a C++ application designed to find and report discrepancies in client data. Also maintained and enhanced a C++ parser that collects financial trades directly from the Advent Axys / APX accounting system.",
+       "location": "601 Merritt Seven, Norwalk, Connecticut, 06851",
+      "accomplishments": [
+        "Reduced a 1,100ms fetch time from a custom time-series database to 475ms on HBase with the new storage format.",
+	"Recommended further system-wide changes to remove 300ms of fetch time from the remaining 475ms.",
+        "Managed a Hadoop internship project demonstrating a 100x performance gain for a subset of Alpha Testing features.",
+	"Demonstrated a 100x+ performance gain of the Compustat Point-in-Time Database in moving to HBase.",
+	"Led winning team of FactSet's Choice Award in Hack-a-Thon 2012, demonstrating HBase at a 2x performance gain over the FactSet custom time-series database.",
+	"Recognized by the Mid-Atlantic Sales Team for exemplary customer service in helping resolve client data and parser problems in 2007."
+      ]
     }
   ]
 }
@@ -111,13 +125,19 @@ work.display = function displayWork() {
 	$("#workExperience").append(HTMLworkStart);
 
 	var formattedName =
-	    HTMLworkEmployer.replace('%data%', work.jobs[job].employer)
-	    + HTMLworkTitle.replace('%data%', work.jobs[job].title);
+	    HTMLworkEmployer.replace(dataTmpl, work.jobs[job].employer)
+	    + HTMLworkTitle.replace(dataTmpl, work.jobs[job].title);
 
 	$(".work-entry:last").append(formattedName);
-	$(".work-entry:last").append(HTMLworkDates.replace('%data%', work.jobs[job].dates));
-	$(".work-entry:last").append(HTMLworkLocation.replace('%data%', work.jobs[job].location));
-	$(".work-entry:last").append(HTMLworkDescription.replace('%data%', work.jobs[job].description));
+	$(".work-entry:last").append(HTMLworkDates.replace(dataTmpl, work.jobs[job].dates));
+	$(".work-entry:last").append(HTMLworkLocation.replace(dataTmpl, work.jobs[job].location));
+	$(".work-entry:last").append(HTMLworkDescription.replace(dataTmpl, work.jobs[job].description));
+	if (work.jobs[job].accomplishments && work.jobs[job].accomplishments.length > 0) {
+	    $(".work-entry:last").append(HTMLworkAccomplishmentsStart);
+	    for (accomplishment in work.jobs[job].accomplishments) {
+		$(".accomplishments:last").append(HTMLworkAccomplishmentsEntry.replace(dataTmpl, work.jobs[job].accomplishments[accomplishment]));
+	    }
+	}
     }
   }
 }
@@ -128,6 +148,11 @@ var projects = {
         "title": "XML to Avro",
         "dates": "July - September 2014",
         "description": "Tool to generate an Avro schema from an XML Schema, and store any XML documents following that schema in Avro."
+      },
+      {
+	"title": "Virtual Reality eCommerce",
+	"dates": "January - May 2005",
+	"description": "Designed and developed the server side of a prototype QuickTime VR three-dimensional interface to an online store. Researched different virtual reality environments and settled on QuickTime VR. Coded a web services client for the Amazon Web Services service on the server in Java / JSP."
       }
   ]
 }
@@ -137,11 +162,11 @@ projects.display = function() {
   if (projects.projects && projects.projects.length > 0) {
     for (project in projects.projects) {
 	$("#projects").append(HTMLprojectStart);
-	$(".project-entry:last").append(HTMLprojectTitle.replace('%data%', projects.projects[project].title));
-	$(".project-entry:last").append(HTMLprojectDates.replace('%data%', projects.projects[project].dates));
-	$(".project-entry:last").append(HTMLprojectDescription.replace('%data%', projects.projects[project].description));
+	$(".project-entry:last").append(HTMLprojectTitle.replace(dataTmpl, projects.projects[project].title));
+	$(".project-entry:last").append(HTMLprojectDates.replace(dataTmpl, projects.projects[project].dates));
+	$(".project-entry:last").append(HTMLprojectDescription.replace(dataTmpl, projects.projects[project].description));
 	if (projects.projects[project].image) {
-	    $(".project-entry:last").append(HTMLprojectImage.replace('%data%', projects.projects[project].image));
+	    $(".project-entry:last").append(HTMLprojectImage.replace(dataTmpl, projects.projects[project].image));
 	}
     }
   }
