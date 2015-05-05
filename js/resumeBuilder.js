@@ -80,6 +80,21 @@ education.display = function() {
 	    $(".education-entry:last").append(HTMLschoolMajor.replace(dataTmpl, education.schools[school].major));
 	}
     }
+
+    if (education.onlineCourses && education.onlineCourses.length > 0) {
+	$("#education").append(HTMLonlineClasses);
+	for (course in education.onlineCourses) {
+	    $("#education").append(HTMLschoolStart);
+
+	    var formattedName =
+		HTMLonlineTitle.replace(dataTmpl, education.onlineCourses[course].title)
+	        + HTMLonlineSchool.replace(dataTmpl, education.onlineCourses[course].school);
+
+	    $(".education-entry:last").append(formattedName);
+	    $(".education-entry:last").append(HTMLonlineDates.replace(dataTmpl, education.onlineCourses[course].dates));
+	    $(".education-entry:last").append(HTMLonlineURL.replace(dataTmpl, education.onlineCourses[course].url));
+	}
+    }
 }
 
 var work = {
