@@ -12,24 +12,20 @@ var bio = {
   "skills": [
     "C++", "Java", "Scala"
   ],
-  "bioPic": null
+  "bioPic": "images/profile.jpg"
 }
 
 bio.display = function() {
     $("#header").prepend(HTMLheaderRole.replace('%data%', bio.role));
     $("#header").prepend(HTMLheaderName.replace('%data%', bio.name));
+
     $("#topContacts").append(HTMLmobile.replace('%data%', bio.contacts.mobile));
     $("#topContacts").append(HTMLemail.replace('%data%', bio.contacts.email));
     $("#topContacts").append(HTMLtwitter.replace('%data%', bio.contacts.twitter));
     $("#topContacts").append(HTMLgithub.replace('%data%', bio.contacts.github));
     $("#topContacts").append(HTMLlocation.replace('%data%', bio.contacts.location));
 
-    $("#footerContacts").append(HTMLmobile.replace('%data%', bio.contacts.mobile));
-    $("#footerContacts").append(HTMLemail.replace('%data%', bio.contacts.email));
-    $("#footerContacts").append(HTMLtwitter.replace('%data%', bio.contacts.twitter));
-    $("#footerContacts").append(HTMLgithub.replace('%data%', bio.contacts.github));
-    $("#footerContacts").append(HTMLlocation.replace('%data%', bio.contacts.location));
-
+    $("#header").append(HTMLbioPic.replace('%data%', bio.bioPic));
 
     if (bio.skills && bio.skills.length > 0) {
 	$("#header").append(HTMLskillsStart);
@@ -37,6 +33,12 @@ bio.display = function() {
 	    $("#skills").append(HTMLskills.replace('%data%', bio.skills[skill]));
 	}
     }
+
+    $("#footerContacts").append(HTMLmobile.replace('%data%', bio.contacts.mobile));
+    $("#footerContacts").append(HTMLemail.replace('%data%', bio.contacts.email));
+    $("#footerContacts").append(HTMLtwitter.replace('%data%', bio.contacts.twitter));
+    $("#footerContacts").append(HTMLgithub.replace('%data%', bio.contacts.github));
+    $("#footerContacts").append(HTMLlocation.replace('%data%', bio.contacts.location));
 }
 
 var education = {
@@ -157,10 +159,6 @@ bio.display();
 work.display();
 projects.display();
 education.display();
-
-$(document).click(function(loc) {
-    console.log("Click: [" + loc.pageX + ", " + loc.pageY + "]");
-});
 
 $("#mapDiv").append(googleMap);
 
