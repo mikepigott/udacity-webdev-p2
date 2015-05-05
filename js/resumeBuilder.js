@@ -45,21 +45,21 @@ var work = {
       "title": "Senior Software Engineer",
       "dates": "September 2014 - Present",
       "description": "None.",
-      "location": "New York, New York"
+      "location": "1400 Broadway, New York, NY 10118"
     },
     {
       "employer": "LinkedIn, Inc.",
       "title": "Senior Software Engineer",
       "dates": "April 2013 - May 2014",
       "description": "None.",
-      "location": "New York, New York"
+      "location": "350 5th Ave, New York, NY 10118"
     },
     {
        "employer": "FactSet Research Systems, Inc.",
        "title": "Senior Software Engineer",
        "dates": "July 2005 - February 2013",
        "description": "Lots of stuff.",
-       "location": "Norwalk, Connecticut"
+       "location": "601 Merritt Seven, Norwalk, Connecticut, 06851"
     }
   ]
 }
@@ -85,6 +85,22 @@ function displayWork() {
     }
 }
 
+function inName() {
+    var nameArray = bio.name.split(' ');
+    var outName =
+         nameArray[0].substring(0, 1).toUpperCase()  + nameArray[0].substring(1)
+           + " " + nameArray[1].toUpperCase();
+    return outName;
+}
+
+$("#header").prepend(HTMLheaderRole.replace('%data%', bio.role));
+$("#header").prepend(HTMLheaderName.replace('%data%', bio.name));
+$("#topContacts").append(HTMLmobile.replace('%data%', bio.contacts.mobile));
+$("#topContacts").append(HTMLemail.replace('%data%', bio.contacts.email));
+$("#topContacts").append(HTMLtwitter.replace('%data%', bio.contacts.twitter));
+$("#topContacts").append(HTMLgithub.replace('%data%', bio.contacts.github));
+$("#topContacts").append(HTMLlocation.replace('%data%', bio.contacts.location));
+
 if (bio.skills && bio.skills.length > 0) {
     $("#header").append(HTMLskillsStart);
     for (skill in bio.skills) {
@@ -95,6 +111,9 @@ if (bio.skills && bio.skills.length > 0) {
 if (work.jobs && work.jobs.length > 0) {
     displayWork();
 }
+
 $(document).click(function(loc) {
     console.log("Click: [" + loc.pageX + ", " + loc.pageY + "]");
 });
+
+$("#main").append(internationalizeButton);
