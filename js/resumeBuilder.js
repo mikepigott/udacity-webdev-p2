@@ -14,34 +14,33 @@ var bio = {
   "skills": [
     "C++", "Java", "Scala", "Perl", "Hadoop", "HBase", "ANTLR", "Play Framework"
   ],
-  "bioPic": "images/profile.jpg"
-}
+  "bioPic": "images/profile.jpg",
+  "display": function() {
+      $("#header").prepend(HTMLheaderRole.replace(dataTmpl, bio.role));
+      $("#header").prepend(HTMLheaderName.replace(dataTmpl, bio.name));
 
-bio.display = function() {
-    $("#header").prepend(HTMLheaderRole.replace(dataTmpl, bio.role));
-    $("#header").prepend(HTMLheaderName.replace(dataTmpl, bio.name));
+      $("#topContacts").append(HTMLmobile.replace(dataTmpl, bio.contacts.mobile));
+      $("#topContacts").append(HTMLemail.replace(dataTmpl, bio.contacts.email));
+      $("#topContacts").append(HTMLtwitter.replace(dataTmpl, bio.contacts.twitter));
+      $("#topContacts").append(HTMLgithub.replace(dataTmpl, bio.contacts.github));
+      $("#topContacts").append(HTMLlocation.replace(dataTmpl, bio.contacts.location));
 
-    $("#topContacts").append(HTMLmobile.replace(dataTmpl, bio.contacts.mobile));
-    $("#topContacts").append(HTMLemail.replace(dataTmpl, bio.contacts.email));
-    $("#topContacts").append(HTMLtwitter.replace(dataTmpl, bio.contacts.twitter));
-    $("#topContacts").append(HTMLgithub.replace(dataTmpl, bio.contacts.github));
-    $("#topContacts").append(HTMLlocation.replace(dataTmpl, bio.contacts.location));
+      $("#header").append(HTMLwelcomeMsg.replace(dataTmpl, bio.welcomeMessage));
+      $("#header").append(HTMLbioPic.replace(dataTmpl, bio.bioPic));
 
-    $("#header").append(HTMLwelcomeMsg.replace(dataTmpl, bio.welcomeMessage));
-    $("#header").append(HTMLbioPic.replace(dataTmpl, bio.bioPic));
+      if (bio.skills && bio.skills.length > 0) {
+          $("#header").append(HTMLskillsStart);
+          for (skill in bio.skills) {
+              $("#skills").append(HTMLskills.replace(dataTmpl, bio.skills[skill]));
+          }
+      }
 
-    if (bio.skills && bio.skills.length > 0) {
-	$("#header").append(HTMLskillsStart);
-	for (skill in bio.skills) {
-	    $("#skills").append(HTMLskills.replace(dataTmpl, bio.skills[skill]));
-	}
-    }
-
-    $("#footerContacts").append(HTMLmobile.replace(dataTmpl, bio.contacts.mobile));
-    $("#footerContacts").append(HTMLemail.replace(dataTmpl, bio.contacts.email));
-    $("#footerContacts").append(HTMLtwitter.replace(dataTmpl, bio.contacts.twitter));
-    $("#footerContacts").append(HTMLgithub.replace(dataTmpl, bio.contacts.github));
-    $("#footerContacts").append(HTMLlocation.replace(dataTmpl, bio.contacts.location));
+      $("#footerContacts").append(HTMLmobile.replace(dataTmpl, bio.contacts.mobile));
+      $("#footerContacts").append(HTMLemail.replace(dataTmpl, bio.contacts.email));
+      $("#footerContacts").append(HTMLtwitter.replace(dataTmpl, bio.contacts.twitter));
+      $("#footerContacts").append(HTMLgithub.replace(dataTmpl, bio.contacts.github));
+      $("#footerContacts").append(HTMLlocation.replace(dataTmpl, bio.contacts.location));
+  }
 }
 
 var education = {
@@ -62,39 +61,38 @@ var education = {
       "dates": 2015,
       "url": "http://www.udacity.com/"
     }
-  ]
-}
+  ],
+  "display": function() {
+      if (education.schools && education.schools.length > 0) {
+          for (school in education.schools) {
+          $("#education").append(HTMLschoolStart);
 
-education.display = function() {
-    if (education.schools && education.schools.length > 0) {
-	for (school in education.schools) {
-	    $("#education").append(HTMLschoolStart);
+          var formattedName =
+                HTMLschoolName.replace(dataTmpl, education.schools[school].name)
+                  + HTMLschoolDegree.replace(dataTmpl, education.schools[school].degree);
 
-	    var formattedName =
-		HTMLschoolName.replace(dataTmpl, education.schools[school].name)
-	          + HTMLschoolDegree.replace(dataTmpl, education.schools[school].degree);
-
-	    $(".education-entry:last").append(formattedName);
-	    $(".education-entry:last").append(HTMLschoolDates.replace(dataTmpl, education.schools[school].dates));
-	    $(".education-entry:last").append(HTMLschoolLocation.replace(dataTmpl, education.schools[school].location));
-	    $(".education-entry:last").append(HTMLschoolMajor.replace(dataTmpl, education.schools[school].major));
-	}
+            $(".education-entry:last").append(formattedName);
+            $(".education-entry:last").append(HTMLschoolDates.replace(dataTmpl, education.schools[school].dates));
+            $(".education-entry:last").append(HTMLschoolLocation.replace(dataTmpl, education.schools[school].location));
+            $(".education-entry:last").append(HTMLschoolMajor.replace(dataTmpl, education.schools[school].major));
+        }
     }
 
     if (education.onlineCourses && education.onlineCourses.length > 0) {
-	$("#education").append(HTMLonlineClasses);
-	for (course in education.onlineCourses) {
-	    $("#education").append(HTMLschoolStart);
+        $("#education").append(HTMLonlineClasses);
+        for (course in education.onlineCourses) {
+            $("#education").append(HTMLschoolStart);
 
-	    var formattedName =
-		HTMLonlineTitle.replace(dataTmpl, education.onlineCourses[course].title)
-	        + HTMLonlineSchool.replace(dataTmpl, education.onlineCourses[course].school);
+            var formattedName =
+                HTMLonlineTitle.replace(dataTmpl, education.onlineCourses[course].title)
+                + HTMLonlineSchool.replace(dataTmpl, education.onlineCourses[course].school);
 
-	    $(".education-entry:last").append(formattedName);
-	    $(".education-entry:last").append(HTMLonlineDates.replace(dataTmpl, education.onlineCourses[course].dates));
-	    $(".education-entry:last").append(HTMLonlineURL.replace(dataTmpl, education.onlineCourses[course].url));
-	}
+            $(".education-entry:last").append(formattedName);
+            $(".education-entry:last").append(HTMLonlineDates.replace(dataTmpl, education.onlineCourses[course].dates));
+            $(".education-entry:last").append(HTMLonlineURL.replace(dataTmpl, education.onlineCourses[course].url));
+        }
     }
+  }
 }
 
 var work = {
@@ -124,38 +122,38 @@ var work = {
        "location": "601 Merritt Seven, Norwalk, Connecticut, 06851",
       "accomplishments": [
         "Reduced a 1,100ms fetch time from a custom time-series database to 475ms on HBase with the new storage format.",
-	"Recommended further system-wide changes to remove 300ms of fetch time from the remaining 475ms.",
+        "Recommended further system-wide changes to remove 300ms of fetch time from the remaining 475ms.",
         "Managed a Hadoop internship project demonstrating a 100x performance gain for a subset of Alpha Testing features.",
-	"Demonstrated a 100x+ performance gain of the Compustat Point-in-Time Database in moving to HBase.",
-	"Led winning team of FactSet's Choice Award in Hack-a-Thon 2012, demonstrating HBase at a 2x performance gain over the FactSet custom time-series database.",
-	"Recognized by the Mid-Atlantic Sales Team for exemplary customer service in helping resolve client data and parser problems in 2007."
+        "Demonstrated a 100x+ performance gain of the Compustat Point-in-Time Database in moving to HBase.",
+        "Led winning team of FactSet's Choice Award in Hack-a-Thon 2012, demonstrating HBase at a 2x performance gain over the FactSet custom time-series database.",
+        "Recognized by the Mid-Atlantic Sales Team for exemplary customer service in helping resolve client data and parser problems in 2007."
       ]
     }
-  ]
-}
+  ],
+  "display": function displayWork() {
+      if (work.jobs && work.jobs.length > 0) {
+          for (job in work.jobs) {
+              $("#workExperience").append(HTMLworkStart);
 
-work.display = function displayWork() {
-  if (work.jobs && work.jobs.length > 0) {
-    for (job in work.jobs) {
-	$("#workExperience").append(HTMLworkStart);
+              var formattedName =
+                  HTMLworkEmployer.replace(dataTmpl, work.jobs[job].employer)
+                  + HTMLworkTitle.replace(dataTmpl, work.jobs[job].title);
 
-	var formattedName =
-	    HTMLworkEmployer.replace(dataTmpl, work.jobs[job].employer)
-	    + HTMLworkTitle.replace(dataTmpl, work.jobs[job].title);
-
-	$(".work-entry:last").append(formattedName);
-	$(".work-entry:last").append(HTMLworkDates.replace(dataTmpl, work.jobs[job].dates));
-	$(".work-entry:last").append(HTMLworkLocation.replace(dataTmpl, work.jobs[job].location));
-	$(".work-entry:last").append(HTMLworkDescription.replace(dataTmpl, work.jobs[job].description));
-	if (work.jobs[job].accomplishments && work.jobs[job].accomplishments.length > 0) {
-	    $(".work-entry:last").append(HTMLworkAccomplishmentsStart);
-	    for (accomplishment in work.jobs[job].accomplishments) {
-		$(".accomplishments:last").append(HTMLworkAccomplishmentsEntry.replace(dataTmpl, work.jobs[job].accomplishments[accomplishment]));
-	    }
-	}
-    }
+              $(".work-entry:last").append(formattedName);
+              $(".work-entry:last").append(HTMLworkDates.replace(dataTmpl, work.jobs[job].dates));
+              $(".work-entry:last").append(HTMLworkLocation.replace(dataTmpl, work.jobs[job].location));
+              $(".work-entry:last").append(HTMLworkDescription.replace(dataTmpl, work.jobs[job].description));
+              if (work.jobs[job].accomplishments && work.jobs[job].accomplishments.length > 0) {
+                  $(".work-entry:last").append(HTMLworkAccomplishmentsStart);
+                  for (accomplishment in work.jobs[job].accomplishments) {
+                      $(".accomplishments:last").append(HTMLworkAccomplishmentsEntry.replace(dataTmpl, work.jobs[job].accomplishments[accomplishment]));
+                  }
+              }
+          }
+      }
   }
 }
+
 
 var projects = {
   "projects": [
@@ -165,25 +163,23 @@ var projects = {
         "description": "Tool to generate an Avro schema from an XML Schema, and store any XML documents following that schema in Avro."
       },
       {
-	"title": "Virtual Reality eCommerce",
-	"dates": "January - May 2005",
-	"description": "Designed and developed the server side of a prototype QuickTime VR three-dimensional interface to an online store. Researched different virtual reality environments and settled on QuickTime VR. Coded a web services client for the Amazon Web Services service on the server in Java / JSP."
+        "title": "Virtual Reality eCommerce",
+        "dates": "January - May 2005",
+        "description": "Designed and developed the server side of a prototype QuickTime VR three-dimensional interface to an online store. Researched different virtual reality environments and settled on QuickTime VR. Coded a web services client for the Amazon Web Services service on the server in Java / JSP."
       }
-  ]
-}
-
-projects.display = function() {
-
-  if (projects.projects && projects.projects.length > 0) {
-    for (project in projects.projects) {
-	$("#projects").append(HTMLprojectStart);
-	$(".project-entry:last").append(HTMLprojectTitle.replace(dataTmpl, projects.projects[project].title));
-	$(".project-entry:last").append(HTMLprojectDates.replace(dataTmpl, projects.projects[project].dates));
-	$(".project-entry:last").append(HTMLprojectDescription.replace(dataTmpl, projects.projects[project].description));
-	if (projects.projects[project].image) {
-	    $(".project-entry:last").append(HTMLprojectImage.replace(dataTmpl, projects.projects[project].image));
-	}
-    }
+  ],
+  "display": function() {
+      if (projects.projects && projects.projects.length > 0) {
+          for (project in projects.projects) {
+              $("#projects").append(HTMLprojectStart);
+              $(".project-entry:last").append(HTMLprojectTitle.replace(dataTmpl, projects.projects[project].title));
+              $(".project-entry:last").append(HTMLprojectDates.replace(dataTmpl, projects.projects[project].dates));
+              $(".project-entry:last").append(HTMLprojectDescription.replace(dataTmpl, projects.projects[project].description));
+              if (projects.projects[project].image) {
+                  $(".project-entry:last").append(HTMLprojectImage.replace(dataTmpl, projects.projects[project].image));
+              }
+          }
+      }
   }
 }
 
